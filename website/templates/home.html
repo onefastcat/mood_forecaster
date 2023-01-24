@@ -1,0 +1,58 @@
+
+{% extends "base.html" %}
+
+
+{% block title%}
+Home
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>HOME</h1>
+
+    <div class="mood-data">
+
+
+
+        <div>
+
+
+            <form action="{{ url_for('views.home') }}" method="post" id="form" name="form">
+
+                <div class="data">
+                    <div id="pressure" name="pressure" id="pressure" value="15">
+                        150
+                    </div>
+                </div>
+
+                <div>Today I feel</div>
+                <span>Terrible</span>
+                <input type="range" id="mood-slider" name="mood-slider"
+                 min="0" max="10" step="1" value="5" oninput="result.value = 'Your mood score is ' + this.value"/>
+                 <span>Great</span>
+                 <div>
+                    <output name="result" for="slider"> Your mood score is 5</output>
+                 </div>
+
+
+                 <div>My energy level is</div>
+
+                <span>Low</span>
+                <input type="range" id="energy-slider" name="energy-slider"
+                 min="0" max="10" step="1" value="5" oninput="result2.value = 'Your energy score is ' + this.value"/>
+                 <span>High</span>
+                 <div>
+                    <output name="result2" for="slider"> Your energy score is 5</output>
+                 </div>
+                 <input type="submit" value="Submit" />
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+{% endblock %}
