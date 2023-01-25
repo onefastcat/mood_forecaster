@@ -58,3 +58,4 @@ def forecast():
         # later add view that tells user to login
         flash('Please Log In to see mood forecast', category='error')
         return redirect(url_for('views.home'))
+
