@@ -9,6 +9,7 @@ alembic = "*"
 flask-migrate = "*"
 python-dotenv = "*"
 numpy = "*"
+flask = {extras = ["async"], version = "*"}
 
 [dev-packages]
 

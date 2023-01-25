@@ -11,5 +11,23 @@ Home
 
 <h1>Forecast</h1>
 
+{% if forecast %}
+
+<div id="moods">
+Mood:
+{% for mood in forecast.moods %}
+ {{ mood }}
+{% endfor %}
+</div>
+
+<div id="energy">
+Energy level:
+{% for energy_level in forecast.energy %}
+ {{ energy_level }}
+{% endfor %}
+</div>
+
+
+{% endif %}
 
 {% endblock %}

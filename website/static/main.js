@@ -151,12 +151,9 @@ addEventListener('DOMContentLoaded', async (event) => {
             })
         });
 
-
-
-
-
-        window.location.href = '/mood-forecast';
-
+        if(response.status == 200){
+            window.location.href='/mood-forecast'
+        }
 
 
     });
