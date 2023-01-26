@@ -15,34 +15,34 @@ def mood_forecast(data):
     moods_vals = moodPrediction(temp, pressure, historical_temp, historical_pressure)
     energy_vals = energyPrediction(temp, pressure, historical_temp, historical_pressure)
 
-    moods = []
-    energy = []
+    mood_labels = []
+    energy_labels = []
 
     print(moods_vals)
 
     for i, mood in  enumerate(moods_vals):
         print(i)
         if mood < 5:
-            moods.append('lower')
+            mood_labels.append('lower')
         elif mood < 7:
-            moods.append('average')
+            mood_labels.append('average')
         elif mood < 9:
-            moods.append('better')
+            mood_labels.append('better')
         else:
-            moods.append('great')
+            mood_labels.append('great')
 
     for i, energy_val in  enumerate(energy_vals):
         if energy_val < 5:
-            energy.append('lower')
+            energy_labels.append('lower')
         elif energy_val < 7:
-            energy.append('average')
+            energy_labels.append('average')
         elif energy_val < 9:
-            energy.append('higher')
+            energy_labels.append('higher')
         else:
-             energy.append('high')
+            energy_labels.append('high')
 
-    mood_energy_forecast = {'moods' : moods,
-                             'energy' : energy}
+    mood_energy_forecast = {'moods' : mood_labels,
+                             'energy' : energy_labels}
 
 
     return mood_energy_forecast

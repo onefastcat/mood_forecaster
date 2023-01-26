@@ -1,20 +1,43 @@
 
 // will need to change the latitude and longitude based on what address user provides
 
-const api_url = "https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&hourly=temperature_2m,precipitation,surface_pressure&temperature_unit=fahrenheit"
+const api_url = "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,precipitation,surface_pressure&temperature_unit=fahrenheit"
+
+const options = {
+    enableHighAccuracy: true,
+    maximumAge: 86400000
+};
+
+
+async function getPosition() {
+    return new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    );
+}
+
 
 async function getTodaysData() {
 
     const date = new Date();
     today = date.toISOString().slice(0,10);
-    console.log(today)
+    let position;
 
-    const current_api_url = api_url.concat(`&start_date=${today}&end_date=${today}`);
+    try {
+        position = await getPosition();
+    } catch(e) {
+        alert('Error: ' + e.message);
+    }
 
-    const response = await fetch(current_api_url);
-    const data = await response.json();
+    url = api_url + "&latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude + '&start_date=' + today + '&end_date=' + today;
 
-    return data;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    }
+    catch(e) {
+        alert('Error: ' + e.message)
+    }
 }
 
 async function getForecast() {
@@ -117,6 +140,9 @@ addEventListener('DOMContentLoaded', async (event) => {
                                    mood: mood,
                                    energy: energy })
         });
+
+        window.location.href = '/';
+
 
     });
 

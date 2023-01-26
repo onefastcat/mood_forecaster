@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from flask_login import current_user
+import requests
 
 
 
@@ -58,4 +59,3 @@ def forecast():
         # later add view that tells user to login
         flash('Please Log In to see mood forecast', category='error')
         return redirect(url_for('views.home'))
-
