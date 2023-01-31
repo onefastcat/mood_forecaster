@@ -13,21 +13,32 @@ Home
 
 {% if forecast %}
 
-<div id="moods">
-Mood:
-{% for mood in forecast.moods %}
- {{ mood }}
-{% endfor %}
+
+<div class="days">
+    {% for day in range(7) %}
+    <div class="day-entry">
+        <div class="day-content">
+            <div class="date"></div>
+
+            <div class="weather-content">
+                <div> {{ temp[day] | round | int }} &#x2109 </div>
+                <div> Precipitation: {{ precip[day] | round | int }} </div>
+                <div> Pressure: {{ pressure[day] | round | int }} </div>
+            </div>
+
+            <div class="mood-data">Mood: {{ forecast.moods[day] }}</div>
+
+            <div class="energy-data">Energy: {{ forecast.energy[day] }}</div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
-<div id="energy">
-Energy level:
-{% for energy_level in forecast.energy %}
- {{ energy_level }}
-{% endfor %}
-</div>
+
+
 
 
 {% endif %}
+<script src="{{url_for('static', filename='forecast.js')}}"></script>
 
 {% endblock %}

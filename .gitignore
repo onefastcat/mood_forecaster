@@ -70,3 +70,9 @@ website/.env
 website/.flaskenv
 website/__init__.py
 website/__pycache__/*
+
+
+
+.DS_Store
+Pipfile
+Pipfile.lock

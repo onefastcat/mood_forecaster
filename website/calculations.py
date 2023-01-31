@@ -17,10 +17,8 @@ pressure = [val for (val,) in db.session.query(DataPoint.pressure).filter(DataPo
 
 def mood_temp_calc():
 
-
     mood_temp_corr = np.corrcoef(mood_list, temperature)[0,1]
     print('accessed some users db')
-
 
     return mood_temp_corr
 

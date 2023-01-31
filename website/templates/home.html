@@ -9,54 +9,57 @@ Home
 
 {% block content %}
 
-    <h1>HOME</h1>
+    <!-- <h1>HOME</h1> -->
 
-    <div class="mood-data">
-
-
-
-        <div>
-
+    <div class="home-container">
 
             <form action="{{ url_for('views.home') }}" method="post" id="form" name="form">
 
-                <div class="data">
-                    <div id="pressure" name="pressure" id="pressure" value="15">
-                        150
+                <!-- <div class="data">
+                    <div id="temp" name="temp" id="temp" value=""></div>
+                    <div id="pressure" name="pressure" id="pressure" value=""></div>
+                    <div id="precip" name="precip" id="precip" value=""></div>
+                </div> -->
+
+                <!-- instead of the CODE ABOVE ADD A PROMPT TO TELL USER TO RATE THEIR MOOD AND ENERGY LEVEL -->
+                <!-- will need to change main.js -->
+
+                <div id="mood-container">
+                    <div> Today I feel</div>
+
+                    <span>Terrible</span>
+
+                    <input type="range" class="slider" id="mood-slider" name="mood-slider"
+                    min="0" max="10" step="1" value="5" oninput="result.value = 'Your mood score is ' + this.value"/>
+
+                    <span>Great</span>
+                    <div>
+                        <output name="result" for="slider"> Your mood score is 5</output>
                     </div>
                 </div>
 
-                <div>Today I feel</div>
-                <span>Terrible</span>
-                <input type="range" id="mood-slider" name="mood-slider"
-                 min="0" max="10" step="1" value="5" oninput="result.value = 'Your mood score is ' + this.value"/>
-                 <span>Great</span>
-                 <div>
-                    <output name="result" for="slider"> Your mood score is 5</output>
-                 </div>
 
+                <div id="energy-container">
+                    <div>My energy level is</div>
 
-                 <div>My energy level is</div>
+                    <span>Low</span>
 
-                <span>Low</span>
-                <input type="range" id="energy-slider" name="energy-slider"
-                 min="0" max="10" step="1" value="5" oninput="result2.value = 'Your energy score is ' + this.value"/>
-                 <span>High</span>
-                 <div>
-                    <output name="result2" for="slider"> Your energy score is 5</output>
-                 </div>
-                 <input type="submit" value="Submit" />
+                    <input type="range" class="slider" id="energy-slider" name="energy-slider"
+                    min="0" max="10" step="1" value="5" oninput="result2.value = 'Your energy score is ' + this.value"/>
+                    <span>High</span>
+                    <div>
+                        <output name="result2" for="slider"> Your energy score is 5</output>
+                    </div>
+                </div>
+
+                <input type="submit" value="Submit" />
+
             </form>
 
-            <form action="/mood-forcast">
+            <form action="/mood-forecast">
                 <input type="submit" value="See Mood Forecast" id="mood_forecast" />
             </form>
-
-        </div>
     </div>
 
-
-
-
-    <script src="{{url_for('static', filename='main.js')}}"></script>
+<script src="{{url_for('static', filename='main.js')}}"></script>
 {% endblock %}
