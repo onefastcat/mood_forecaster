@@ -7,29 +7,24 @@ Sign up
 
 {% block content %}
     <form method="POST">
-        <h3>
-            Sign up
-        </h3>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" placeholder="Enter Email" id="email" name="email"/>
+        <div class=form-container>
+            <h3>
+                Sign up
+            </h3>
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="Enter Email" id="email" name="email"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="Enter Username" id="username" name="username"/>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" placeholder="Enter Password" id="password" name="password"/>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" placeholder="Password" id="password_reenter" name="password_reenter"/>
+            </div>
+            <input type="submit" id="sign-up-btn" value="Submit" />
         </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" placeholder="Enter Username" id="username" name="username"/>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" placeholder="Enter Password" id="password" name="password"/>
-        </div>
-        <div class="form-group">
-            <label for="password">Re-entrer Password</label>
-            <input type="password" class="form-control" placeholder="Password" id="password_reenter" name="password_reenter"/>
-        </div>
-        <button type="submit">
-            Submit
-        </button>
-
     </form>
 
 {% endblock %}

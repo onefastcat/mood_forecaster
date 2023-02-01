@@ -13,6 +13,13 @@ Home
 
     <div class="home-container">
 
+
+
+        {% if current_user.is_authenticated %}
+                <div>HEYYYYYYYY</div>
+
+        {% endif %}
+
             <form action="{{ url_for('views.home') }}" method="post" id="form" name="form">
 
                 <!-- <div class="data">
@@ -52,13 +59,12 @@ Home
                     </div>
                 </div>
 
-                <input type="submit" value="Submit" />
+
+                <input type="submit" value="Submit" id="submit-form-btn" />
+                <input type="submit" value="See Mood Forecast" id="mood-forecast-btn" />
 
             </form>
 
-            <form action="/mood-forecast">
-                <input type="submit" value="See Mood Forecast" id="mood_forecast" />
-            </form>
     </div>
 
 <script src="{{url_for('static', filename='main.js')}}"></script>

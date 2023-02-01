@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash, get_flashed_messages, jsonify
 from flask_login import current_user
+
 
 
 views = Blueprint('views', __name__)
@@ -16,11 +17,13 @@ def home():
             data = request.get_json()
             from .db_manage import add_user_data
             add_user_data(data)
-            return redirect(url_for('views.home'))
+            print('data submitted')
+            flash('Data Submitted', category='message')
+
+            return jsonify()
         else:
-            # flash('Please Log In to see mood forecast', category='error')
-            print('not authed')
-            return redirect(url_for('auth.login'))
+            flash('Please Log In to submit form', category='error')
+            return jsonify(), 401
 
     return render_template('home.html')
 

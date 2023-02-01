@@ -5,26 +5,27 @@ const api_url = "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,pr
 
 
 
+
+
 const options = {
     enableHighAccuracy: false,
-    timeout: 5000,
-    maximumAge: Infinity
+    timeout: 10000,
+    maximumAge: 1000500,
 };
 
 
 async function getPosition() {
     return new Promise((resolve, reject) =>
-        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        navigator.geolocation.watchPosition(resolve, reject, options)
     );
 }
+
 
 
 async function getTodaysData(latitude, longitude) {
 
     const date = new Date();
     today = date.toISOString().slice(0,10);
-    let position;
-
 
     try {
         url = api_url + "&latitude=" + latitude + "&longitude=" + longitude + '&start_date=' + today + '&end_date=' + today;
@@ -87,17 +88,25 @@ async function getPrevData(latitude, longitude) {
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
-    // let days = document.getElementsByClassName('days')[0];
-
-    // days.classList.add('data')
-    console.log('in forecast')
-
     let position = await getPosition();
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let data = await getTodaysData(latitude, longitude);
 
-    console.log(data)
+    // const submit_button = document.getElementById('submit-form-btn');
+    // const
+
+    // if (submit_button.classList.contains('active')) button.disabled = "false";
+    // else button.disabled = "false"
+
+    // let days = document.getElementsByClassName('days')[0];
+
+    // days.classList.add('data')
+
+    // let position = await getPosition();
+    // let latitude = position.coords.latitude;
+    // let longitude = position.coords.longitude;
+    // let data = await getTodaysData(latitude, longitude);
 
     const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
     const sum = arr => arr.reduce( (accum, cur) => accum + cur, 0);
@@ -108,10 +117,9 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     // const pressure_element = document.getElementById('pressure');
     // const precipitation_element = document.getElementById('precip');
 
-    // + removes the last zeroes at the end of floats
-    const pressure = +average(data.hourly.surface_pressure).toFixed(5);
-    const temperature = +average(data.hourly.temperature_2m).toFixed(5);
-    const precipitation = +sum(data.hourly.precipitation).toFixed(5);
+    let pressure_arr = await data.hourly.surface_pressure;
+    let temp_arr = await data.hourly.temperature_2m;
+    let precip_arr = await data.hourly.precipitation;
 
     // temp_element.data = temperature;
     // pressure_element.data = pressure;
@@ -126,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     // container.appendChild(precipitation_element);
 
     const form = document.getElementById('form');
-    const mood_prediction_btn = document.getElementById('mood_forecast');
+    const mood_prediction_btn = document.getElementById('mood-forecast-btn');
 
     form.addEventListener('submit', async (event) => {
 
@@ -140,14 +148,22 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ temperature: temperature,
-                                   pressure: pressure,
-                                   precipitation: precipitation,
+            body: JSON.stringify({ temperature: temp_arr,
+                                   pressure: pressure_arr,
+                                   precipitation: precip_arr,
                                    mood: mood,
                                    energy: energy })
         });
 
-        window.location.href = '/';
+
+        if (response.status == 200){
+            window.location.href = '/';
+        }
+
+        if (response.status == 401){
+            window.location.href = '/login';
+        }
+
 
     });
 

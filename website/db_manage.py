@@ -2,6 +2,7 @@ from . import db
 from .models import DataPoint
 from datetime import date
 from flask_login import current_user
+import numpy
 
 
 
@@ -18,9 +19,9 @@ def add_user_data(data):
         props = {
             'mood_value' : data['mood'],
             'energy_value' : data['energy'],
-            'temperature' : data['temperature'],
-            'precipitation' : data['precipitation'],
-            'pressure' : data['pressure']
+            'temperature' : numpy.average(data['temperature']),
+            'precipitation' : numpy.sum(data['precipitation']),
+            'pressure' : numpy.average(data['pressure']),
         }
         for key, value in props.items():
             setattr(todays_entry, key, value)

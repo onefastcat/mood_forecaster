@@ -17,7 +17,7 @@ def login():
 
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in', category='success')
+                flash('Logged in', category='message')
                 login_user(user, remember=True)
 
                 return redirect(url_for('views.home'))
@@ -48,7 +48,7 @@ def signup():
         db.session.commit()
 
         login_user(new_user, remember=True)
-        flash('User created')
+        flash('User created', category = 'message')
 
         return redirect(url_for('views.home'))
 
@@ -62,4 +62,5 @@ def signup():
 def logout():
     session.clear()
     logout_user()
+    flash('Logged Out', category = 'message')
     return redirect(url_for('views.home'))

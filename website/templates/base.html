@@ -28,11 +28,11 @@
         </nav>
 
         <div class="messages">
-            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert">
-                <span class="close_btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {% for category,message in messages %}
+            <div class="alert {{ category }}">
+                <span class="close_btn {{ category }}" onclick="this.parentElement.style.display='none';">&times;</span>
                 {{ message }}
             </div>
             {% endfor %}

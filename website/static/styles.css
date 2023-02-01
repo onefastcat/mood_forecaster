@@ -1,13 +1,25 @@
+html {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+}
 
 body {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
     margin: 0;
-    height: 100vh;
-    color: rgb(0, 0, 0);
+    background-attachment: fixed;
+}
+
+h3 {
+    color: rgba(255, 255, 255, 0.923);
+    font-weight: 400;
 }
 
 .home-nav {
     height: 50px;
-    background-color: rgba(45, 96, 64, 0.855);
+    background-color: rgb(7, 60, 109);
 
 }
 
@@ -15,6 +27,7 @@ body {
     padding: 15px 20px 15px;
     display: flex;
     justify-content: right;
+    font-weight: 300;
 }
 
 .item {
@@ -33,7 +46,6 @@ body {
 
 .alert {
     padding: 20px 20px 20px;
-    background-color: #f44336ce;
     color: white;
     margin-bottom: 15px;
     border-radius: 10px;
@@ -42,9 +54,16 @@ body {
     font-size: 16px;
 }
 
+.alert.error {
+    background-color: #f44336ce;
+}
+
+.alert.message {
+    background-color: #7dff45b8;
+}
+
 .close_btn {
     margin-left: 15px;
-    color: white;
     font-weight: bold;
     float: right;
     font-size: 22px;
@@ -55,36 +74,45 @@ body {
     right: 4%;
 }
 
+
+
+
 .content {
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 9vh;
 }
-
+/*
 .home-content {
     display: flex;
     justify-content: space-between;
 
-}
+} */
 
 .content > div {
     padding: 10px 0;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 .container {
     height: 100vh;
-    /* background-image: url("images/rainy.jpg"); */
     background-size: cover;
 
 }
 
 #mood-container, #energy-container {
+    background-color: rgba(255, 255, 255, 0.37);
     text-align: center;
     margin: 20px 20px;
     padding: 20px 20px;
     border: 0;
-    box-shadow: 0px 0px 15px 5px rgba(213, 213, 213, 0.407);
+    box-shadow: 0px 0px 40px 5px rgba(0, 91, 107, 0.829);
     width: auto;
     color: rgb(56, 56, 56);
     border-radius: 10px;
@@ -92,12 +120,14 @@ body {
 
 #mood-container > div, #energy-container > div {
     padding: 20px 20px;
+
 }
 
 
 input[type=range] {
+    background-color: rgba(236, 236, 236, 0.0);
     width: 400px;
-    height: 10px;
+    height: 9px;
     -webkit-appearance: none;
     color: black;
     border: 0px solid #010101;
@@ -112,11 +142,11 @@ input[type=range]::-webkit-slider-runnable-track {
     background: #101010;
     border-radius: 0px;
     border: 0px solid #010101;
+    margin: 0 10px;
 }
 
 input[type=range]::-webkit-slider-thumb {
     box-shadow: none;
-    border: 0px solid #ffffff;
     box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
     height: 40px;
     width: 20px;
@@ -128,12 +158,13 @@ input[type=range]::-webkit-slider-thumb {
     backdrop-filter: drop-shadow(4px 4px 10px blue);
 }
 
+
 .days {
     display: flex;
     justify-content: space-around;
     flex: 1;
     gap: 10px;
-
+    width: 100%;
 }
 
 .day-entry {
@@ -159,6 +190,88 @@ input[type=range]::-webkit-slider-thumb {
     font-size: 12px;
     color: grey;
 }
+
+input[type=submit] {
+    padding: 10px 15px;
+    background-color: #ffffff00;
+    appearance: none;
+    border-radius: 12px;
+    width: 200px;
+    align-self: center;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-weight: 300;
+    border: solid rgba(255,255,255,0.35) 1px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    opacity: .75;
+    cursor: pointer;
+}
+
+
+#login-btn, #sign-up-btn {
+    margin-top: 10px;
+    width:inherit;
+    border: solid rgba(255,255,255,0.65) 1px;
+    /* background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.196);
+    color: rgba(3, 1, 55, 0.85);
+    font-weight: 400; */
+}
+
+
+
+.active {
+    background-color: black;
+}
+
+
+input[type=text], input[type=password] {
+    border: 0;
+    border-radius: 10px;
+    padding: 3px 5px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    border: 0;
+    appearance: none;
+    outline: none;
+}
+
+button {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #01d347;
+    appearance: none;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.356);
+    padding: 50px 40px 60px;
+    border-radius: 10px;
+
+}
+
+
+.form-group {
+    justify-content: center;
+    display: flex;
+    padding-bottom: 3px;
+    align-items: center;
+}
+
+.form-input {
+    flex: 1;
+    height: 25px;
+}
+
 
 
 
