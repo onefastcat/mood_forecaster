@@ -1,11 +1,4 @@
-
-// will need to change the latitude and longitude based on what address user provides
-
 const api_url = "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,precipitation,surface_pressure&temperature_unit=fahrenheit"
-
-
-
-
 
 const options = {
     enableHighAccuracy: false,
@@ -13,14 +6,11 @@ const options = {
     maximumAge: 1000500,
 };
 
-
-async function getPosition() {
+function getPosition() {
     return new Promise((resolve, reject) =>
-        navigator.geolocation.watchPosition(resolve, reject, options)
-    );
+        {navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
 }
-
-
 
 async function getTodaysData(latitude, longitude) {
 
@@ -43,15 +33,8 @@ async function getTodaysData(latitude, longitude) {
 async function getForecast(latitude, longitude) {
     const date = new Date();
     let next_week = new Date();
-    // let tomorrow = new Date();
-
-    // position = await getPosition();
-
-    // let latitude = position.coords.latitude;
-    // let longitude = position.coords.longitude;
 
     next_week.setDate(date.getDate() + 6);
-    // tomorrow.setDate(date.getDate() + 1)
 
     next_week = next_week.toISOString().slice(0,10);
     let today = date.toISOString().slice(0,10);
@@ -88,7 +71,11 @@ async function getPrevData(latitude, longitude) {
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
+
+    console.log('before get position')
     let position = await getPosition();
+    console.log('after get position')
+
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let data = await getTodaysData(latitude, longitude);
@@ -108,8 +95,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     // let longitude = position.coords.longitude;
     // let data = await getTodaysData(latitude, longitude);
 
-    const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-    const sum = arr => arr.reduce( (accum, cur) => accum + cur, 0);
+    // const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+    // const sum = arr => arr.reduce( (accum, cur) => accum + cur, 0);
 
     // const container = document.getElementsByClassName('data')[0];
 
@@ -117,9 +104,13 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     // const pressure_element = document.getElementById('pressure');
     // const precipitation_element = document.getElementById('precip');
 
+    console.log('before awaiting data')
+
     let pressure_arr = await data.hourly.surface_pressure;
     let temp_arr = await data.hourly.temperature_2m;
     let precip_arr = await data.hourly.precipitation;
+    console.log('after awaiting data')
+
 
     // temp_element.data = temperature;
     // pressure_element.data = pressure;
@@ -137,11 +128,14 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     const mood_prediction_btn = document.getElementById('mood-forecast-btn');
 
     form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        console.log('inside submit data')
+        console.log('check if data is here. temp array must display')
+        console.log(temp_arr)
 
         let mood = parseInt(document.getElementById('mood-slider').value);
         let energy = parseInt(document.getElementById('energy-slider').value);
-
-        event.preventDefault();
 
         let response = await fetch('/', {
             method: 'POST',
@@ -161,9 +155,9 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
 
         if (response.status == 401){
+            console.log('unauthorized')
             window.location.href = '/login';
         }
-
 
     });
 
@@ -213,6 +207,9 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             window.location.href='/mood-forecast'
         }
 
+        if(response.status == 401){
+            window.location.href='/login'
+        }
 
 
     });
@@ -257,6 +254,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
         return arr_sums;
     }
+
 
 
 

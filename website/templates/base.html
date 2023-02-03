@@ -11,19 +11,19 @@
 </head>
 <body>
     <div class="container">
-        <nav class="home-nav">
+        <nav class="navbar">
             <div class='nav-wrap'>
-            <div class="nav-contents">
+                <div class="nav-contents">
 
-                <a class="item" href="/home">Home</a>
-                {% if current_user.is_authenticated %}
-                <a class="item" href="/logout">Log out</a>
-                {% else %}
-                <a class="item" href="/login">Log in</a>
-                <a class="item" href="/sign-up">Sign up</a>
-                {% endif %}
+                    <a class="item" href="/home">Home</a>
+                    {% if current_user.is_authenticated %}
+                    <a class="item" href="/logout">Log out</a>
+                    {% else %}
+                    <a class="item" href="/login">Log in</a>
+                    <a class="item" href="/sign-up">Sign up</a>
+                    {% endif %}
 
-            </div>
+                </div>
             </div>
         </nav>
 
@@ -39,7 +39,6 @@
             {% endif %}
             {% endwith %}
         </div>
-
 
         <div class="content">
 

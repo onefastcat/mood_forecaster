@@ -14,16 +14,18 @@ def home():
 
         if current_user.is_authenticated:
             print('authed')
+            print(request.get_json())
             data = request.get_json()
             from .db_manage import add_user_data
             add_user_data(data)
-            print('data submitted')
             flash('Data Submitted', category='message')
-
             return jsonify()
         else:
             flash('Please Log In to submit form', category='error')
             return jsonify(), 401
+
+    elif current_user.is_authenticated:
+        redirect(url_for("views.home")+"#mood-form")
 
     return render_template('home.html')
 
@@ -60,4 +62,4 @@ def forecast():
     else:
 
         flash('Please Log In to see mood forecast', category='error')
-        return redirect(url_for('views.home'))
+        return jsonify(), 401

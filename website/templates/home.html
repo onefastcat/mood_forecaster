@@ -11,25 +11,20 @@ Home
 
     <!-- <h1>HOME</h1> -->
 
+    {% if current_user.is_authenticated %}
+    {% else %}
+    <div class="titles-container">
+        <p id="main-heading">Get Your Mood Forecast</p>
+        <p id="secondary-heading">A Personalized Daily Mood Prediction Based on Your Data</p>
+        <div class="scroll-btn"><a href="#mood-form">Try it!</a></div>
+    </div>
+    {% endif %}
+
     <div class="home-container">
 
+        <section id="mood-form"></section>
 
-
-        {% if current_user.is_authenticated %}
-                <div>HEYYYYYYYY</div>
-
-        {% endif %}
-
-            <form action="{{ url_for('views.home') }}" method="post" id="form" name="form">
-
-                <!-- <div class="data">
-                    <div id="temp" name="temp" id="temp" value=""></div>
-                    <div id="pressure" name="pressure" id="pressure" value=""></div>
-                    <div id="precip" name="precip" id="precip" value=""></div>
-                </div> -->
-
-                <!-- instead of the CODE ABOVE ADD A PROMPT TO TELL USER TO RATE THEIR MOOD AND ENERGY LEVEL -->
-                <!-- will need to change main.js -->
+            <form action="{{ url_for('views.home') }}" method="post" id="energy-mood-form" name="form">
 
                 <div id="mood-container">
                     <div> Today I feel</div>

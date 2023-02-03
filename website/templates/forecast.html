@@ -17,16 +17,18 @@ Home
     <div class="day-entry">
         <div class="day-content">
             <div class="date"></div>
+            <div class="data-container">
+                <div class="weather-content">
+                    <div class="temperature"> {{ temp[day] | round | int }}&#x2109 </div>
+                    <div class="precipitation"> Precipitation: {{ precip[day] | round | int }} </div>
+                    <div class="pressure"> Pressure: {{ pressure[day] | round | int }} </div>
+                </div>
 
-            <div class="weather-content">
-                <div> {{ temp[day] | round | int }} &#x2109 </div>
-                <div> Precipitation: {{ precip[day] | round | int }} </div>
-                <div> Pressure: {{ pressure[day] | round | int }} </div>
+                <div class="energy-mood-content">
+                    <div class="mood-data">Mood: {{ forecast.moods[day] }}</div>
+                    <div class="energy-data">Energy: {{ forecast.energy[day] }}</div>
+                </div>
             </div>
-
-            <div class="mood-data">Mood: {{ forecast.moods[day] }}</div>
-
-            <div class="energy-data">Energy: {{ forecast.energy[day] }}</div>
         </div>
     </div>
     {% endfor %}
