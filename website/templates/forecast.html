@@ -12,7 +12,8 @@ Home
 {% if forecast %}
 
 
-<div class="days">
+<div class="forecast">
+    <div class="days">
     {% for day in range(7) %}
     <div class="day-entry">
         <div class="day-content">
@@ -32,6 +33,7 @@ Home
         </div>
     </div>
     {% endfor %}
+    </div>
 </div>
 
 

@@ -24,9 +24,6 @@ def home():
             flash('Please Log In to submit form', category='error')
             return jsonify(), 401
 
-    elif current_user.is_authenticated:
-        redirect(url_for("views.home")+"#mood-form")
-
     return render_template('home.html')
 
 

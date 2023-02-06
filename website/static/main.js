@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     // container.appendChild(pressure_element);
     // container.appendChild(precipitation_element);
 
-    const form = document.getElementById('form');
+    const form = document.getElementById('energy-mood-form');
     const mood_prediction_btn = document.getElementById('mood-forecast-btn');
 
     form.addEventListener('submit', async (event) => {
