@@ -13,8 +13,6 @@ def home():
     if request.method == 'POST':
 
         if current_user.is_authenticated:
-            print('authed')
-            print(request.get_json())
             data = request.get_json()
             from .db_manage import add_user_data
             add_user_data(data)

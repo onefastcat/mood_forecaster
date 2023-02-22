@@ -7,8 +7,8 @@ const options = {
 };
 
 function getPosition() {
-    return new Promise((resolve, reject) =>
-        {navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options);
     });
 }
 
@@ -31,6 +31,10 @@ async function getTodaysData(latitude, longitude) {
 }
 
 async function getForecast(latitude, longitude) {
+
+    console.log('getting forecast')
+
+
     const date = new Date();
     let next_week = new Date();
 
@@ -161,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
     });
 
-    mood_prediction_btn.addEventListener('click', async(event) => {
+    mood_prediction_btn.addEventListener('click', async (event) => {
 
         event.preventDefault();
 
@@ -177,15 +181,12 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const historical_average_temps = hourly_to_averages(prev_data.hourly.temperature_2m);
         const historical_average_precip = hourly_to_sums(prev_data.hourly.precipitation);
 
-
-
         // for (let i=0; i < days.length; i++){
         //     let date = new Date();
         //     days[i].innerText = date.setDate(date.getDate() + i);
 
         //     console.log('in days')
         // }
-
 
 
 
