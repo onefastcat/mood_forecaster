@@ -21,7 +21,6 @@ async function getTodaysData(latitude, longitude) {
         url = api_url + "&latitude=" + latitude + "&longitude=" + longitude + '&start_date=' + today + '&end_date=' + today;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data.hourly.precipitation)
         return data;
 
     } catch(e) {
@@ -31,9 +30,6 @@ async function getTodaysData(latitude, longitude) {
 }
 
 async function getForecast(latitude, longitude) {
-
-    console.log('getting forecast')
-
 
     const date = new Date();
     let next_week = new Date();
@@ -75,58 +71,16 @@ async function getPrevData(latitude, longitude) {
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
-
-    console.log('before get position')
     let position = await getPosition();
-    console.log('after get position')
-
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let data = await getTodaysData(latitude, longitude);
 
-    // const submit_button = document.getElementById('submit-form-btn');
-    // const
-
-    // if (submit_button.classList.contains('active')) button.disabled = "false";
-    // else button.disabled = "false"
-
-    // let days = document.getElementsByClassName('days')[0];
-
-    // days.classList.add('data')
-
-    // let position = await getPosition();
-    // let latitude = position.coords.latitude;
-    // let longitude = position.coords.longitude;
-    // let data = await getTodaysData(latitude, longitude);
-
-    // const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-    // const sum = arr => arr.reduce( (accum, cur) => accum + cur, 0);
-
-    // const container = document.getElementsByClassName('data')[0];
-
-    // const temp_element = document.getElementById('temp');
-    // const pressure_element = document.getElementById('pressure');
-    // const precipitation_element = document.getElementById('precip');
-
-    console.log('before awaiting data')
 
     let pressure_arr = await data.hourly.surface_pressure;
     let temp_arr = await data.hourly.temperature_2m;
     let precip_arr = await data.hourly.precipitation;
-    console.log('after awaiting data')
 
-
-    // temp_element.data = temperature;
-    // pressure_element.data = pressure;
-    // precipitation_element.data = precipitation;
-
-    // temp_element.innerText = temperature;
-    // pressure_element.innerText = pressure;
-    // precipitation_element.innerText = precipitation;
-
-    // container.appendChild(temp_element);
-    // container.appendChild(pressure_element);
-    // container.appendChild(precipitation_element);
 
     const form = document.getElementById('energy-mood-form');
     const mood_prediction_btn = document.getElementById('mood-forecast-btn');
@@ -181,14 +135,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const historical_average_temps = hourly_to_averages(prev_data.hourly.temperature_2m);
         const historical_average_precip = hourly_to_sums(prev_data.hourly.precipitation);
 
-        // for (let i=0; i < days.length; i++){
-        //     let date = new Date();
-        //     days[i].innerText = date.setDate(date.getDate() + i);
-
-        //     console.log('in days')
-        // }
-
-
 
         let response = await fetch('/mood-forecast', {
             method: 'POST',
@@ -224,7 +170,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         let arr_averages = [];
 
         for( let i = 0; i < dataArr.length; i++){
-            // console.log(i)
             sum += dataArr[i];
             //adds a sum of pressures for 24 hours (1 day)
             //resets the sum for further calculation for next 24 hour period
@@ -243,7 +188,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         let arr_sums = [];
 
         for( let i = 0; i < dataArr.length; i++){
-            // console.log(i)
             sum += dataArr[i];
             //adds a sum of pressures for 24 hours (1 day)
             //resets the sum for further calculation for next 24 hour period
@@ -255,9 +199,5 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
         return arr_sums;
     }
-
-
-
-
 
 });

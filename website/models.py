@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(50), unique=True)
     username = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(50))
+    password = db.Column(db.String())
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     data_points = db.relationship('DataPoint', backref='users')
 
