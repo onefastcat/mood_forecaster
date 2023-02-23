@@ -15,7 +15,7 @@ DB_NAME = "database.db"
 
 class Config:
     SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL") or \
-        "postgres://yukysjqchtlbep:b4938b192835e830a8c7a62e6500e1e822ac354dae5c955da9c89f3618e0ced1@ec2-44-194-4-127.compute-1.amazonaws.com:5432/ddfnl258civ99s"
+        "postgresql://yukysjqchtlbep:b4938b192835e830a8c7a62e6500e1e822ac354dae5c955da9c89f3618e0ced1@ec2-44-194-4-127.compute-1.amazonaws.com:5432/ddfnl258civ99s"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 def create_app():
