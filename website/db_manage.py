@@ -34,14 +34,6 @@ def add_user_data(data):
         user_id = user.id)
         db.session.add(todays_entry)
 
-
-
-
-    # DataPoint.query.delete()
     db.session.commit()
-
-    # entries = DataPoint.query.filter(DataPoint.user_id == user.id).all()
-    # print(entries)
-
 
     return

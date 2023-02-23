@@ -38,9 +38,8 @@ def forecast():
             return redirect(url_for('views.home'))
 
         if request.method == 'POST' and data_points_num >= least_num_for_forecast:
-            # forecast for next 7 days
-            data = request.get_json()
 
+            data = request.get_json()
             from .forecast_calc import mood_forecast
 
             # calculates mood/energy forecast

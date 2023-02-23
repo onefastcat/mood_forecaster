@@ -13,8 +13,6 @@ precipitation = [val for (val,) in db.session.query(DataPoint.precipitation).fil
 pressure = [val for (val,) in db.session.query(DataPoint.pressure).filter(DataPoint.user_id == current_user.id).all()]
 
 
-
-
 def mood_temp_calc():
 
     mood_temp_corr = np.corrcoef(mood_list, temperature)[0,1]
