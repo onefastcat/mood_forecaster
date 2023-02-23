@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from .views import views
-from os import environ
+from os import environ, getenv
 
 
 
@@ -15,8 +15,14 @@ DB_NAME = "database.db"
 
 class Config:
     SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL") or \
-        "postgresql://yukysjqchtlbep:b4938b192835e830a8c7a62e6500e1e822ac354dae5c955da9c89f3618e0ced1@ec2-44-194-4-127.compute-1.amazonaws.com:5432/ddfnl258civ99s"
+        "postgres://yukysjqchtlbep:b4938b192835e830a8c7a62e6500e1e822ac354dae5c955da9c89f3618e0ced1@ec2-44-194-4-127.compute-1.amazonaws.com:5432/ddfnl258civ99s"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+
+
+
+
 
 def create_app():
     app = Flask(__name__)
@@ -34,6 +40,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix=('/'))
 
     from .models import User
+
 
 
     with app.app_context():
