@@ -44,7 +44,6 @@ def mood_forecast(data):
     mood_energy_forecast = {'moods' : mood_labels,
                              'energy' : energy_labels}
 
-
     return mood_energy_forecast
 
 
