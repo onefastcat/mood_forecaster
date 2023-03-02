@@ -43,11 +43,10 @@ async function getForecast(latitude, longitude) {
 
     let response = await fetch(forecast_api_url);
     let data = await response.json();
-    console.log(forecast_api_url)
 
     return data;
 }
-// perhaps refactor this and the previous two methods, so that only use one method for all 3 situations
+
 async function getPrevData(latitude, longitude) {
     const date = new Date();
     let prev_week = new Date();
@@ -88,17 +87,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        console.log('inside submit data')
-        console.log('check if data is here. temp array must display')
-        console.log(temp_arr)
-
         let mood = parseInt(document.getElementById('mood-slider').value);
         let energy = parseInt(document.getElementById('energy-slider').value);
+        let csrf_token = document.getElementById('csrf_token').value;
 
         let response = await fetch('/', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrf_token
             },
             body: JSON.stringify({ temperature: temp_arr,
                                    pressure: pressure_arr,
@@ -113,7 +110,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
 
         if (response.status == 401){
-            console.log('unauthorized')
             window.location.href = '/login';
         }
 

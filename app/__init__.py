@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from .views import views
-from os import environ, getenv
+from os import environ
+from .csrf import csrf
 
 
 
@@ -31,6 +32,8 @@ def create_app():
     app.config.from_object(Config)
     app.config['SECRET_KEY'] = "iisHcMFopS6ldoeo"
 
+    csrf.init_app(app)
+
     db.init_app(app)
     migrate.init_app(app, db)
 
@@ -40,8 +43,6 @@ def create_app():
     app.register_blueprint(auth, url_prefix=('/'))
 
     from .models import User
-
-
 
     with app.app_context():
         db.create_all()
