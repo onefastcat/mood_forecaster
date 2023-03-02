@@ -22,9 +22,6 @@ class Config:
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
 
-
-
-
 def create_app():
     app = Flask(__name__)
 
@@ -56,7 +53,6 @@ def create_app():
         return User.query.get(int(id))
 
     return app
-
 
 
 app = create_app()

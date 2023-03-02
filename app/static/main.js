@@ -55,7 +55,6 @@ async function getPrevData(latitude, longitude) {
     prev_week.setDate(date.getDate() - 7);
     yesterday.setDate(date.getDate() - 1)
 
-
     prev_week = prev_week.toISOString().slice(0,10);
     yesterday = yesterday.toISOString().slice(0,10);
 
@@ -75,11 +74,9 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     let longitude = position.coords.longitude;
     let data = await getTodaysData(latitude, longitude);
 
-
     let pressure_arr = await data.hourly.surface_pressure;
     let temp_arr = await data.hourly.temperature_2m;
     let precip_arr = await data.hourly.precipitation;
-
 
     const form = document.getElementById('energy-mood-form');
     const mood_prediction_btn = document.getElementById('mood-forecast-btn');
@@ -131,7 +128,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const historical_average_temps = hourly_to_averages(prev_data.hourly.temperature_2m);
         const historical_average_precip = hourly_to_sums(prev_data.hourly.precipitation);
 
-
         let response = await fetch('/mood-forecast', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'
@@ -156,9 +152,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
 
     });
-
-
-
 
 
     function hourly_to_averages(dataArr) {
@@ -195,5 +188,4 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
         return arr_sums;
     }
-
 });

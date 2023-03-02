@@ -44,7 +44,7 @@ def forecast():
 
             # calculates mood/energy forecast
             forecast_data = mood_forecast(data)
-            #store it in session
+
             session['forecast'] = forecast_data
             session['pressure'] = data['pressure']
             session['temp'] = data['temp']

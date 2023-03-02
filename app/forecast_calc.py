@@ -18,10 +18,7 @@ def mood_forecast(data):
     mood_labels = []
     energy_labels = []
 
-    print(moods_vals)
-
     for i, mood in  enumerate(moods_vals):
-        print(i)
         if mood < 5:
             mood_labels.append('lower')
         elif mood < 7:
@@ -94,7 +91,7 @@ def moodPrediction(futureTemp, futurePressure,  pastTemp, pastPressure):
 
 def energyPrediction(futureTemp, futurePressure,  pastTemp, pastPressure):
 
-     # set significant correlation value
+    # set significant correlation value
     threshold_corr_value = .1
     # get mood correlations
     energy_temp_corr = energy_temp_calc()
