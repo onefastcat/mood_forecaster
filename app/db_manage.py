@@ -9,15 +9,20 @@ def add_user_data(data):
     user = current_user
 
     today = date(date.today().year, date.today().month, date.today().day)
-    todays_entry = DataPoint.query.filter(DataPoint.user_id == user.id and
-                        DataPoint.date_created == today).first()
+    todays_entry = DataPoint.query.filter(DataPoint.user_id == user.id).filter(DataPoint.date_created == today).first()
 
-    temp = numpy.average(data['temperature'])
-    precip = numpy.sum(data['precipitation'])
-    press = numpy.average(data['pressure'])
+
+
+    print(todays_entry)
+    print(today)
+
+    temp = numpy.average(data['temperature']).item()
+    precip = numpy.sum(data['precipitation']).item()
+    press = numpy.average(data['pressure']).item()
 
     # if there's already an entry today, update it with new data
     if todays_entry:
+        print('updating db entry')
         props = {
             'mood_value' : data['mood'],
             'energy_value' : data['energy'],
@@ -29,6 +34,7 @@ def add_user_data(data):
             setattr(todays_entry, key, value)
     # if its first submission today, add the data
     else:
+        print('making new entry in the db')
         todays_entry = DataPoint(mood_value=data['mood'], energy_value=data['energy'],
         temperature=temp, precipitation=precip, pressure=press,
         user_id = user.id)

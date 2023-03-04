@@ -32,8 +32,8 @@
             {% if messages %}
             {% for category,message in messages %}
             <div class="alert {{ category }}">
-                <span class="close_btn {{ category }}" onclick="this.parentElement.style.display='none';">&times;</span>
-                {{ message }}
+                <div class="close_btn {{ category }}" onclick="this.parentElement.style.display='none';">&times;</div>
+                <div class="alert-message"> {{ message }} </div>
             </div>
             {% endfor %}
             {% endif %}

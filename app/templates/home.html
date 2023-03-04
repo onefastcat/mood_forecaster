@@ -25,7 +25,7 @@ Home
         <section id="mood-form"></section>
 
             <form action="{{ url_for('views.home') }}" method="post" id="energy-mood-form" name="form">
-                <input id="csrf_token" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token() }}"/>
 
                 <div id="mood-container">
                     <div> Today I feel</div>

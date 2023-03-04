@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'X-CSRF-Token': csrf_token
+              'X-CSRF-TOKEN': csrf_token
             },
             body: JSON.stringify({ temperature: temp_arr,
                                    pressure: pressure_arr,
@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                                    mood: mood,
                                    energy: energy })
         });
-
 
         if (response.status == 200){
             window.location.href = '/';
@@ -127,10 +126,13 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const historical_average_pressures = hourly_to_averages(prev_data.hourly.surface_pressure);
         const historical_average_temps = hourly_to_averages(prev_data.hourly.temperature_2m);
         const historical_average_precip = hourly_to_sums(prev_data.hourly.precipitation);
+        let csrf_token = document.getElementById('csrf_token').value;
 
         let response = await fetch('/mood-forecast', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf_token
             },
             body: JSON.stringify({
                             pressure: average_pressures,
